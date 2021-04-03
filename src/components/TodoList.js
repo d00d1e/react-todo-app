@@ -1,9 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Todo from "./Todo";
 import TodoForm from "./TodoForm";
 
+const LOCAL_STORAGE_KEY = "todoApp.todos";
+
 export default function TodoList() {
   const [todos, setTodos] = useState([]);
+
+  //retrieve from localStorage
+  useEffect(() => {
+    const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if (storedTodos) setTodos(storedTodos);
+  }, []);
+
+  //store to localStorage
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
+  }, [todos]);
 
   //add todo
   const addTodo = (todo) => {
