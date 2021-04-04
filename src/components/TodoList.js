@@ -54,7 +54,7 @@ export default function TodoList() {
   };
 
   return (
-    <div>
+    <div className="todo-container">
       <h1>What's the Plan for Today?</h1>
       <TodoForm onSubmit={addTodo} />
       <Todo
