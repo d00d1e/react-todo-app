@@ -7,7 +7,7 @@ const LOCAL_STORAGE_KEY = "todoApp.todos";
 export default function TodoList() {
   const [todos, setTodos] = useState([]);
 
-  //retrieve from localStorage
+  //READ todo from localStorage
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
     if (storedTodos) setTodos(storedTodos);
@@ -18,8 +18,9 @@ export default function TodoList() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
   }, [todos]);
 
-  //add todo
+  //CREATE todo
   const addTodo = (todo) => {
+    // if empty or contains white spaces
     if (!todo.text || /^\s*$/.test(todo.text)) {
       return;
     }
@@ -27,7 +28,7 @@ export default function TodoList() {
     setTodos(newTodos);
   };
 
-  //edit todo
+  //EDIT todo
   const editTodo = (id, newValue) => {
     if (!newValue.text || /^\s*$/.test(newValue.text)) {
       return;
@@ -47,7 +48,7 @@ export default function TodoList() {
     setTodos(updatedTodos);
   };
 
-  //delete todo
+  //DELETE todo
   const deleteTodo = (id) => {
     const removedTodo = [...todos].filter((todo) => todo.id !== id);
     setTodos(removedTodo);
